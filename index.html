@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=1024, user-scalable=no">
+
+  <title>Intro to JS: Game Development</title>
+
+  <!-- Required stylesheet -->
+  <link rel="stylesheet" media="screen" href="slide_resources/core/deck.core.css">
+
+  <!-- Extension CSS files go here. Remove or add as needed. -->
+  <link rel="stylesheet" media="screen" href="slide_resources/extensions/goto/deck.goto.css">
+  <link rel="stylesheet" media="screen" href="slide_resources/extensions/menu/deck.menu.css">
+  <link rel="stylesheet" media="screen" href="slide_resources/extensions/navigation/deck.navigation.css">
+  <link rel="stylesheet" media="screen" href="slide_resources/extensions/status/deck.status.css">
+  <link rel="stylesheet" media="screen" href="slide_resources/extensions/scale/deck.scale.css">
+
+  <!-- Style theme. More available in /themes/style/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="slide_resources/themes/style/swiss.css">
+
+  <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="slide_resources/themes/transition/horizontal-slide.css">
+
+  <!-- Basic black and white print styles -->
+  <link rel="stylesheet" media="print" href="slide_resources/core/print.css">
+
+  <!-- Required Modernizr file -->
+  <script src="slide_resources/modernizr.custom.js"></script>
+  <script src="slide_resources/jquery.min.js"></script>
+  <script>
+    var WRITE_WAITING = 0;
+    function write(url) {
+      var _id = url.replace(/\./g,"").replace("/","");
+      window.WRITE_WAITING++;
+      $.get(
+        url,
+        function(data) {
+          $("#"+_id).text(data);
+          window.WRITE_WAITING--;
+          if (window.WRITE_WAITING == 0) { hljs.initHighlighting(); }
+        },
+        "text"
+      )
+    }
+  </script>
+<style>pre { width: 100%; }</style>
+</head>
+<body>
+  <div class="deck-container">
+
+    <!-- Begin slides. Just make elements with a class of slide. -->
+
+    <section class="slide">
+      <h2>Intro to 3D Printing</h2>
+      <h3>What will we learn</h3>
+      <ul>
+        <li>The basics about 3D printing</li>
+        <li>Different types of 3D printing available</li>
+        <li>Types of 3D printing at TXRX Labs</li>
+        <li>Intro to thiniverse</li>
+        <li>How to use the Replicator 2, Replicator 2x, Weistek</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h3>Expectations</h3>
+      <ul>
+        <li>Name?</li>
+        <li>Why are you here?</li>
+        <li>Previous expecations?</li>
+        <li>Specific areas of interest?</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>If you learn nothing else from this class...</h2>
+      <ul>
+        <li>Look up filament printing settings (on filament website)</li>
+        <li>Store filament properly</li>
+        <ul>
+          <li>Filament tangles kill more prints than any other issue</li>
+          <li>Always take your filament off and store it properly</li>
+          <li>If you take someone's filament off, store it properly</li>
+          <li>If you see someone's filament stored improperly, check for tangles, store it properly</li>
+          <li>Prints can fail hours into printing because of tangles</li>
+          <li>Fixing a tangle before hand takes thirty seconds</li>
+        </ul>
+        <li>Watch the first ~5 layers of every print</li>
+        <li>If you take someone elses print off, put in cabinet above Rep. 2x</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h3>What is 3D printing?</h3>
+      <ul>
+        <li>Additive rapid (LOL) prototyping and fabrication process.</li>
+        <li>Uses a CNC system to build objects in near final form in one step.</li>
+        <li>Make objects out of plastic, resin, metal, glass or even food.</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h3>Methods of 3D printing</h3>
+      <ul>
+        <li>Binder - true color <a href="https://www.youtube.com/watch?v=Ne5P08ijC8s" target="_blank">Z-corp</a></li>
+        <li>FDM - What we use here - <a href="http://youtu.be/1_j2zuwjGnY" target="_blank">Makerbot</a></li>
+        <li>Steriolithography - <a href="http://youtu.be/enJq2PquuPE?t=55s" target="_blank">Form 1</a></li>
+        <li>SLS (selective layer sintering)
+          <a href="http://youtu.be/i6Px6RSL9Ac" target="_blank">Metals, plastics, ceramics</a></li>
+        <li>LOM (laminated object manufacturing) <a href="http://youtu.be/6C7bjzIW610" target="_blank">Solido</a></li>
+        <li><a href="http://youtu.be/aQn6NMOWWWk" target="_blank">EBM</a> (electron beam melting)</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h3>FDM Focus</h3>
+      <ul>
+        <li>Fused Deposition Modeling</li>
+        <li>Weistek and Makerbots use FDM</li>
+        <li>We also have SLA (Form 1)</li>
+        <li>Theory is the same, practice varies greatly</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h3>Today's overview</h3>
+      <ul>
+        <li>Review FDM</li>
+        <li>Review software used to process models/control printer.</li>
+        <li>Printer setup/maintenance</li>
+        <li>Printer in action</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h3>FDM Build Materials</h3>
+      <ul>
+        <li>ABS *</li>
+        <li>PLA *</li>
+        <li>PVA</li>
+        <li>Polycarbonate</li>
+        <li>Nylon</li>
+        <li>HIPS</li>
+        <li>Brass/PLA</li>
+        <li>Others</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h3>FDM Theory of Operation</h3>
+      <img src="thingomatic.png" />
+    </section>
+
+    <section class="slide">
+      <h3>Object Creation Workflow</h3>
+      <ul>
+        <li>Generate Object Model (CAD)</li>
+        <li>Save as STL (Stereolithography file)</li>
+        <li>Use CAM Software to Generate Machine Code (Gcode)</li>
+        <li>Send Machine Code to Printer</li>
+        <li>Wait for Object</li>
+        <li>Post process (flame, clean, sand, glue, paint) - none, any, or all</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h3>Object Creation</h3>
+      <ul>
+        <li>Size Limitations</li>
+        <li>
+          Minimum feature size
+          <ul>
+            <li>Layer thickness (0.1, 0.2, 0.3 mm)</li>
+            <li>Remove features smaller than this</li>
+          </ul>
+        </li>
+        <li>
+        Usupported Overhangs
+          <ul>
+            <li>Supports? (breakaway/soluble)</li>
+            <li>Change orientation? cut into pieces?</li>
+          </ul>
+        </li>
+        <li>
+          Geometry Issues
+          <ul>
+            <li>Close object</li>
+            <li>Overlapping/hidden</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h3>Object Creation (cont.)</h3>
+      <ul>
+        <li>
+          Layer Strength
+          <ul>
+            <li>Layers want to pull apart</li>
+            <li>Print in strongest axis</li>
+          </ul>
+        </li>
+        <li>
+          Tab Ears
+          <ul>
+            <li>Thin layers warp, tall thin, towers fall over</li>
+            <li>Add 1 layer thick pad to increase area and hold it down</li>
+          </ul>
+        </li>
+        <li>Oversize (sand and ream)</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h3>Build for speed</h3>
+      <ul>
+        <li>Minimize extraneous parts</li>
+        <li>
+          Reduce overall volume
+          <ul>
+            <li>Cutouts</li>
+            <li>Hollow (lower infill)</li>
+            <li>Taper</li>
+            <li>Don't print unnecessary parts</li>
+            <li>Use traditional methods (is 3d printing really rapid?)</li>
+          </ul>
+        </li>
+        <li>Choose scale wisely</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h3>We have a model?</h3>
+      <ul>
+        <li>
+          CAD
+          <ul>
+            <li>Inventor</li>
+            <li>Solid Works</li>
+            <li>Blender</li>
+            <li>123D</li>
+            <li>Libracad</li>
+            <li>SCAD or JSCAD</li>
+          </ul>
+        </li>
+        <li>Prebuilt (thingiverse.com or others)</li>
+        <li>3D Scanned</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h3>To the machines!</h3>
+      <ul>
+        <li>
+          Convert model to a set of movements
+          <ul>
+            <li>slice</li>
+            <li>gcode</li>
+            <li>can be exported to save time on slicing</li>
+          </ul>
+        </li>
+        <li>This process in general called CAM</li>
+        <li>
+          Many programs to use
+          <ul>
+            <li>Options</li>
+            <li>Complexity</li>
+            <li>Integration</li>
+            <li>Opensource/Closed Source</li>
+          </ul>
+        </li>
+        <li>Key is having parameters for the printer/material you are using</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h3>In house CAM Software</h3>
+      <ul>
+        <li>Makerware - Full featured</li>
+        <li>Doraware - kind of lacking</li>
+        <li>Simplify 3d, others</li>
+        <li>All you need is gcode to print</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h3>Why do prints fail</h3>
+      <ul>
+        <li>Tangled filament (air printing, fail at 0-100% completion)</li>
+        <li>Bad settings (fail/poor quality)</li>
+        <li>Unlevel plate (material won't stick or sticks too much)</li>
+        <li>Bad tape (same as above)</li>
+        <li>Bad model</li>
+        <li>Need support / raft</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h3>Available printer</h3>
+      <ul>
+        <li>Makerbot 2, 2x</li>
+        <li>Weistek</li>
+        <li>Form 1</li>
+      </ul>
+    </section>
+
+    <!-- End slides. -->
+
+    <!-- Begin extension snippets. Add or remove as needed. -->
+
+    <!-- deck.navigation snippet -->
+    <div aria-role="navigation">
+      <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+      <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+    </div>
+
+    <!-- deck.status snippet -->
+    <p class="deck-status" aria-role="status">
+      <span class="deck-status-current"></span>
+      /
+      <span class="deck-status-total"></span>
+    </p>
+
+    <!-- deck.goto snippet -->
+    <form action="." method="get" class="goto-form">
+      <label for="goto-slide">Go to slide:</label>
+      <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+      <datalist id="goto-datalist"></datalist>
+      <input type="submit" value="Go">
+    </form>
+
+    <!-- End extension snippets. -->
+  </div>
+
+<!-- Required JS files. -->
+<script src="slide_resources/core/deck.core.js"></script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="slide_resources/extensions/menu/deck.menu.js"></script>
+<script src="slide_resources/extensions/goto/deck.goto.js"></script>
+<script src="slide_resources/extensions/status/deck.status.js"></script>
+<script src="slide_resources/extensions/navigation/deck.navigation.js"></script>
+<script src="slide_resources/extensions/scale/deck.scale.js"></script>
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+  $(function() {
+    $.deck('.slide');
+  });
+</script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+</body>
+</html>
